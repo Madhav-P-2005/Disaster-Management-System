@@ -19,4 +19,8 @@ urlpatterns = [
     
     # User management endpoints (register, profile, etc.), all prefixed by /api/users/
     path('api/users/', include('users.urls')),  # Include URL patterns from your users app
+
+
+    # Incident management endpoints, all prefixed by /api/incidents/
+    path('api/incidents/', include('incidents.urls')),  # Include URL patterns from your incidents app
 ]

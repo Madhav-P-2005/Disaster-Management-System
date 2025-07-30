@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     # Your custom apps
     'users',                     # Users app for custom user model/APIs
     # Uncomment and add more as you build
-    # 'incidents',
+    'incidents',
     # 'notifications',
     # 'updates',
     # 'authorities',
