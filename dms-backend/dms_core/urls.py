@@ -23,4 +23,9 @@ urlpatterns = [
 
     # Incident management endpoints, all prefixed by /api/incidents/
     path('api/incidents/', include('incidents.urls')),  # Include URL patterns from your incidents app
+
+
+
+    # Notification management endpoints, all prefixed by /api/notifications/
+    path('api/notifications/', include('notifications.urls')),  # Include URL patterns from your notifications app
 ]

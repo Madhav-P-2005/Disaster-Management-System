@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'users',                     # Users app for custom user model/APIs
     # Uncomment and add more as you build
     'incidents',
-    # 'notifications',
+    'notifications',
     # 'updates',
     # 'authorities',
     # 'govt',
