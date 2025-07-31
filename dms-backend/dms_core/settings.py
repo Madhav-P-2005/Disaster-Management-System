@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     # Uncomment and add more as you build
     'incidents',
     'notifications',
-    # 'updates',
+    'updates',
     # 'authorities',
     # 'govt',
     # 'media_uploads',

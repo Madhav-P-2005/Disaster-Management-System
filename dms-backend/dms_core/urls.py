@@ -9,6 +9,7 @@ from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
+
     path('admin/', admin.site.urls),  # Django admin panel (for site management)
     
     # JWT Auth endpoints:
@@ -25,7 +26,12 @@ urlpatterns = [
     path('api/incidents/', include('incidents.urls')),  # Include URL patterns from your incidents app
 
 
-
     # Notification management endpoints, all prefixed by /api/notifications/
     path('api/notifications/', include('notifications.urls')),  # Include URL patterns from your notifications app
+
+
+    # Update management endpoints, all prefixed by /api/updates/
+    path('api/updates/', include('updates.urls')),
+    
+    
 ]
