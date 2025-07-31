@@ -38,8 +38,12 @@ urlpatterns = [
     path('api/authorities/', include('authorities.urls')),  # Include URL patterns from your authorities app
 
 
-
     # Government management endpoints, all prefixed by /api/govt/
     path('api/govt/', include('govt_body.urls')),  # Corrected and uncommented
+
+
+    # Admin operations endpoints, all prefixed by /api/admin/
+    path('api/admin/', include('admin_ops.urls')),  # Include URL patterns from your admin operations app
+    
 
 ]

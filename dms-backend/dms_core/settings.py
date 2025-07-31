@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'updates',
     'authorities',
     'govt_body',
+    'admin_ops',                 # Admin operations app for admin dashboard and stats
+
+    
     # 'media_uploads',
 ]
 
