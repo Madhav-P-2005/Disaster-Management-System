@@ -32,6 +32,12 @@ urlpatterns = [
 
     # Update management endpoints, all prefixed by /api/updates/
     path('api/updates/', include('updates.urls')),
+
+
+    # Authority management endpoints, all prefixed by /api/authorities/
+    path('api/authorities/', include('authorities.urls')),  # Include URL patterns from your authorities app
+
     
+
     
 ]
