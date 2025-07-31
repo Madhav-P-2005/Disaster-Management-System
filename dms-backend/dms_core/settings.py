@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'notifications',
     'updates',
     'authorities',
-    # 'govt',
+    'govt_body',
     # 'media_uploads',
 ]
 
