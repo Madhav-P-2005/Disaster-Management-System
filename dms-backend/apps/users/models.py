@@ -47,6 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     age = models.PositiveIntegerField(blank=True, null=True)  # Optional age
     family_members = models.PositiveIntegerField(blank=True, null=True)  # Optional, number of family members
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='citizen')  # User role, default: citizen
+    
 
     # Permissions-related fields
     is_active = models.BooleanField(default=True)  # Can the user login? (deactivate by setting False)
