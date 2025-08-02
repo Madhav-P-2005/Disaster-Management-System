@@ -64,49 +64,56 @@ class User(AbstractBaseUser, PermissionsMixin):
         # How the user is displayed in admin pages/lists
         return f"{self.email} ({self.role})"
 
-# from django.db import models
-# from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
-# class UserManager(BaseUserManager):
-#     def create_user(self, email, password=None, **extra_fields):
-#         if not email:
-#             raise ValueError("The Email must be set")
-#         email = self.normalize_email(email)
-#         user = self.model(email=email, **extra_fields)
-#         user.set_password(password)
-#         user.save()
-#         return user
 
-#     def create_superuser(self, email, password, **extra_fields):
-#         extra_fields.setdefault('is_staff', True)
-#         extra_fields.setdefault('is_superuser', True)
-#         extra_fields.setdefault('role', 'admin')  # Default role for superuser
-#         return self.create_user(email, password, **extra_fields)
 
-# class User(AbstractBaseUser, PermissionsMixin):
-#     ROLE_CHOICES = (
-#         ('citizen', 'Citizen'),
-#         ('authority', 'Authority'),
-#         ('admin', 'Admin'),
-#     )
+'''
 
-#     name = models.CharField(max_length=100, blank=True, null=True)
-#     email = models.EmailField(unique=True)
-#     phone = models.CharField(max_length=15, blank=True, null=True)
-#     location = models.CharField(max_length=100, blank=True, null=True)
-#     age = models.PositiveIntegerField(blank=True, null=True)
-#     family_members = models.PositiveIntegerField(blank=True, null=True)
-#     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='citizen')
+from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
-#     is_active = models.BooleanField(default=True)
-#     is_staff = models.BooleanField(default=False)
+class UserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError("The Email must be set")
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save()
+        return user
 
-#     govt_body_id = models.IntegerField(null=True, blank=True)
+    def create_superuser(self, email, password, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('role', 'admin')  # Default role for superuser
+        return self.create_user(email, password, **extra_fields)
 
-#     USERNAME_FIELD = 'email'
-#     REQUIRED_FIELDS = []
+class User(AbstractBaseUser, PermissionsMixin):
+    ROLE_CHOICES = (
+        ('citizen', 'Citizen'),
+        ('authority', 'Authority'),
+        ('admin', 'Admin'),
+    )
 
-#     objects = UserManager()
+    name = models.CharField(max_length=100, blank=True, null=True)
+    email = models.EmailField(unique=True)
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    location = models.CharField(max_length=100, blank=True, null=True)
+    age = models.PositiveIntegerField(blank=True, null=True)
+    family_members = models.PositiveIntegerField(blank=True, null=True)
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='citizen')
 
-#     def __str__(self):
-#         return f"{self.email} ({self.role})"
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+
+    govt_body_id = models.IntegerField(null=True, blank=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = UserManager()
+
+    def __str__(self):
+        return f"{self.email} ({self.role})"
+
+'''
