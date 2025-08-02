@@ -97,8 +97,17 @@ WSGI_APPLICATION = 'dms_core.wsgi.application'
 # Default database: uses SQLite for development (change ENGINE for PostgreSQL, etc.)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dms_db',
+        'USER': 'dms_user',
+        'PASSWORD': 'madhavpdms@2025',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
     }
 }
 
