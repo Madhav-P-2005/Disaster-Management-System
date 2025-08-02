@@ -24,8 +24,14 @@ class Notification(models.Model):
     message = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
-    incident_id = models.ForeignKey('incidents.Incident', on_delete=models.CASCADE, related_name='notifications', null=True, blank=True)
+    # Update the field names to proper Django convention :- 
+    # user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
+    # incident_id = models.ForeignKey('incidents.Incident', on_delete=models.CASCADE, related_name='notifications', null=True, blank=True)
+
+  
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
+    incident = models.ForeignKey('incidents.Incident', on_delete=models.CASCADE, related_name='notifications', null=True, blank=True)
+
 
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='unread')
     priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES)

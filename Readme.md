@@ -2,6 +2,10 @@ pip install django djangorestframework djangorestframework-simplejwt django-cors
 
 python manage.py makemigrations
 
+
+python manage.py showmigrations notifications
+
+
 python manage.py migrate
 
 
