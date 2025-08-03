@@ -171,6 +171,25 @@ dms-backend/
 
 ## 📌 Next Up: Frontend with React
 
+
+# npm create vite@latest dms-frontend  -- --template react
+
+
+# cd dms-frontend
+
+# npm install axios react-router-dom@6
+
+<!-- Remove-Item -Recurse -Force node_modules, package-lock.json
+ -->
+
+# npm install -D tailwindcss postcss autoprefixer  or   npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
+
+# npx tailwindcss init -p :- 
+Created tailwind.config.js
+Created postcss.config.js
+
+
+
 🛠️ Will use:
 
 * **Vite + Tailwind CSS**
