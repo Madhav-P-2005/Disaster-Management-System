@@ -1,8 +1,8 @@
-// Path :- dms-frontend/src/pages/profile.jsx 
+// Path :- dms-frontend/src/pages/Profile.jsx 
 
 import React, { useEffect, useState } from 'react';
 
-import axios from 'axios';
+import axiosInstance from '../api/axios';
 
 
 const Profile = () =>{
@@ -13,13 +13,9 @@ const Profile = () =>{
 
     useEffect(() => {
 
-        const token = localStorage.getItem("access_token");
+        // const token = localStorage.getItem("access_token"); (Here the interceptor handles it)
 
-        axios.get("http://localhost:8000/api/users/profile/" , {
-            headers:{
-                Authorization : `Bearer ${token}`
-            }
-        })
+        axiosInstance.get("/users/profile/")
         .then((res) =>{
             setProfile(res.data);
             setError("");

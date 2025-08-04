@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../api/axios';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm({
@@ -17,7 +17,7 @@ const Login = () => {
 
 
     const onSubmit = (data) => {
-        axios.post("http://localhost:8000/api/token/", data)
+        axiosInstance.post("/token/", data)
             .then((res) => {
                 localStorage.setItem("access_token", res.data.access);
                 localStorage.setItem("refresh_token", res.data.refresh);
