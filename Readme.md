@@ -182,12 +182,28 @@ dms-backend/
 <!-- Remove-Item -Recurse -Force node_modules, package-lock.json
  -->
 
+<!-- import tailwindcss from '@tailwindcss/vite' -->
+
+
 # npm install -D tailwindcss postcss autoprefixer  or   npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
 
 # npx tailwindcss init -p :- 
 Created tailwind.config.js
 Created postcss.config.js
 
+Edit in Setting.json :-   (ctrl + ,)   helps to enable extension of tailwindcss intellisense
+
+"tailwindCSS.experimental.classRegex": [
+  ["tw`([^`]*)", "tw"],
+  ["tw=\"([^\"]*)", "tw"],
+  ["tw={\"([^\"]*)", "tw"],
+  ["className=\"([^\"]*)", "className"],
+  ["className={`([^`]*)", "className"]
+]
+
+
+
+npm install react-hook-form
 
 
 🛠️ Will use:
