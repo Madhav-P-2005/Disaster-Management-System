@@ -3,7 +3,9 @@
 import {Routes , Route} from "react-router-dom"
 
 import Login from "./pages/Login"
-import Profile from "./pages/profile"
+import Profile from "./pages/Profile"
+import ProtectedRoute from "./components/ProtectedRoute"
+import Register from "./pages/Register"
 
 // import Register from "./pages/Register"
 
@@ -12,21 +14,23 @@ import Profile from "./pages/profile"
 
 
 function App() {
-      return(
-        <>
-        <div className="flex flex-col items-center justify-center h-screen">
-             <Routes className="flex flex-col items-center justify-center h-screen">
-                  <Route path="/" element={<Login/>} />
-                  <Route path="/profile" element={<Profile/>} />
-                  {/* <Route path="/register"
-                    element={<Register/>}
-                  /> */}
-                  {/* <Route path="/dashboard" element={<Dashboard/>}/> */}
-             </Routes>
-        </div>
-
-        </>
-      )
+     return (
+       <div className="min-h-screen bg-gray-50">
+         <Routes>
+           <Route path="/" element={<Login />} />
+           <Route path="/login" element={<Login />} />
+           <Route path="/register" element={<Register />} />
+           <Route
+             path="/profile"
+             element={
+               <ProtectedRoute>
+                 <Profile />
+               </ProtectedRoute>
+             }
+           />
+         </Routes>
+       </div>
+     );
 }
 
 

@@ -143,3 +143,9 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),                # Authorization header starts with 'Bearer'
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
 }
+
+
+# Authentication Backends :-  This is used to authenticate the user.  You must explicitly tell Django to use its default ModelBackend so it can authenticate your custom user with email (because you replaced username with email using USERNAME_FIELD = 'email').
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
