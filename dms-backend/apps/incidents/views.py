@@ -33,4 +33,6 @@ class IncidentDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]  # Only authenticated users can access this view
 
     def perform_update(self, serializer):
-        serializer.save(reported_by=self.request.user)  # Ensure reported_by is updated to the current user
+        # Don't override reported_by on update - keep original reporter
+        # Only update the fields that are actually being changed
+        serializer.save()

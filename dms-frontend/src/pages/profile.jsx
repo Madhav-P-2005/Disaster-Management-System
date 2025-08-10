@@ -7,19 +7,50 @@ import { useNavigate } from "react-router-dom";
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState(null);
+  const [incidentStats, setIncidentStats] = useState({ reported: 0, alerts: 0 });
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Fetch user profile data only
     axiosInstance
       .get("/users/profile/")
-      .then((res) => {
-        setProfile(res.data);
+      .then((profileRes) => {
+        setProfile(profileRes.data);
         setError("");
       })
       .catch((err) => {
         setError("Failed to fetch profile. Are you logged in?");
       });
   }, []);
+
+  // Separate useEffect to fetch incident stats when profile changes
+  useEffect(() => {
+    if (profile?.id) {
+      axiosInstance
+        .get("/incidents/")
+        .then((res) => {
+          console.log("🔍 DEBUG: All incidents from backend:", res.data);
+          console.log("🔍 DEBUG: Current user ID:", profile.id);
+          
+          // Filter incidents by current user ID
+          const userIncidents = res.data.filter(incident => {
+            console.log(`🔍 DEBUG: Checking incident ${incident.id}: reported_by=${incident.reported_by}, user_id=${profile.id}`);
+            return incident.reported_by === profile.id;
+          });
+          
+          console.log("🔍 DEBUG: User incidents found:", userIncidents);
+          
+          setIncidentStats({
+            reported: userIncidents.length,
+            alerts: 0 // Placeholder for future notification system
+          });
+          console.log(`✅ Updated stats: ${userIncidents.length} incidents for user ID: ${profile.id}`);
+        })
+        .catch((err) => {
+          console.log("❌ Could not fetch incident stats:", err);
+        });
+    }
+  }, [profile?.id]);
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
@@ -208,15 +239,24 @@ const Profile = () => {
               </div>
 
               <div className="space-y-3">
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2">
+                <button 
+                  onClick={() => navigate('/edit-profile')}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2"
+                >
                   <span>📝</span>
                   <span>Edit Profile</span>
                 </button>
-                <button className="w-full bg-red-600 hover:bg-red-700 text-white py-3 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2">
+                <button 
+                  onClick={() => navigate('/report-incident')}
+                  className="w-full bg-red-600 hover:bg-red-700 text-white py-3 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2"
+                >
                   <span>🚨</span>
                   <span>Report Incident</span>
                 </button>
-                <button className="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2">
+                <button 
+                  onClick={() => navigate('/dashboard')}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2"
+                >
                   <span>📊</span>
                   <span>View Dashboard</span>
                 </button>
@@ -234,13 +274,13 @@ const Profile = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">0</div>
+                  <div className="text-2xl font-bold text-blue-600">{incidentStats.reported}</div>
                   <div className="text-xs text-gray-500">
                     Incidents Reported
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">0</div>
+                  <div className="text-2xl font-bold text-green-600">{incidentStats.alerts}</div>
                   <div className="text-xs text-gray-500">Alerts Received</div>
                 </div>
               </div>

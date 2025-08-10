@@ -43,7 +43,7 @@ const Register = () => {
         location: data.location,
         age: parseInt(data.age),
         family_members: parseInt(data.family_members),
-        role: "citizen",
+        role: data.role, // Use the selected role from form
       };
 
       console.log("Sending payload:", payload); // Debug log
@@ -258,19 +258,15 @@ const Register = () => {
                   </label>
                   <select
                     {...register("role")}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200 ${
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 ${
                       errors.role
                         ? "border-red-500 bg-red-50"
                         : "border-gray-300 bg-gray-50 hover:bg-white"
                     }`}
                   >
-                    <option value="citizen">Citizen</option>
-                    <option value="authority" disabled>
-                      Authority
-                    </option>
-                    <option value="admin" disabled>
-                      Admin
-                    </option>
+                    <option value="citizen">👤 Citizen (General Public)</option>
+                    <option value="authority">🚔 Authority (Police/Fire/Medical)</option>
+                    <option value="admin">⚙️ Admin (System Administrator)</option>
                   </select>
                   {errors.role && (
                     <p className="mt-2 text-sm text-red-600 flex items-center">
