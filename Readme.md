@@ -201,6 +201,23 @@ Edit in Setting.json :-   (ctrl + ,)   helps to enable extension of tailwindcss 
   ["className={`([^`]*)", "className"]
 ]
 
+# 1. Install Git LFS (one-time setup)
+git lfs install
+
+# 2. Track MP4 files with LFS
+git lfs track "*.mp4"
+
+# 3. Add the tracking configuration
+git add .gitattributes
+
+# 4. Add your video file
+git add "dms-frontend/public/DMS - SAMPLE WEBSITE VIDEO.mp4"
+
+# 5. Commit the changes
+git commit -m "Add video file with Git LFS support"
+
+# 6. Push successfully
+git push personal Completed-Major-Project-3
 
 
 npm install react-hook-form
