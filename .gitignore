@@ -1,1 +1,10 @@
 .vscode/
+
+
+# Large media files
+*.mp4
+*.avi
+*.mov
+dms-frontend/public/*.mp4
+dms-frontend/public/*.avi
+dms-frontend/public/*.mov
