@@ -19,40 +19,47 @@ const Dashboard = () => {
 
     // Fetch all dashboard data on component mount
     useEffect(() => {
-        const fetchDashboardData = async () => {
-            try {
-                setLoading(true);
-                
-                // Fetch user profile and incidents in parallel for better performance
-                const [profileResponse, incidentsResponse] = await Promise.all([
-                    axiosInstance.get('/users/profile/'),
-                    axiosInstance.get('/incidents/')
-                ]);
-
-                setProfile(profileResponse.data);
-                setIncidents(incidentsResponse.data);
-                setError('');
-                
-                console.log('✅ Dashboard data loaded successfully');
-                console.log('📊 Profile:', profileResponse.data);
-                console.log('📋 Incidents:', incidentsResponse.data);
-                
-            } catch (err) {
-                console.error('❌ Error loading dashboard data:', err);
-                
-                if (err.response?.status === 401) {
-                    setError('Please log in to access the dashboard.');
-                    setTimeout(() => navigate('/login'), 2000);
-                } else {
-                    setError('Failed to load dashboard data. Please try again.');
-                }
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchDashboardData();
     }, [navigate]);
+
+    // Function to fetch dashboard data (can be called to refresh)
+    const fetchDashboardData = async () => {
+        try {
+            setLoading(true);
+            
+            // Fetch user profile and incidents in parallel for better performance
+            const [profileResponse, incidentsResponse] = await Promise.all([
+                axiosInstance.get('/users/profile/'),
+                axiosInstance.get('/incidents/')
+            ]);
+
+            setProfile(profileResponse.data);
+            setIncidents(incidentsResponse.data);
+            setError('');
+            
+            console.log('✅ Dashboard data loaded successfully');
+            console.log('📊 Profile:', profileResponse.data);
+            console.log('📋 Incidents:', incidentsResponse.data);
+            
+        } catch (err) {
+            console.error('❌ Error loading dashboard data:', err);
+            
+            if (err.response?.status === 401) {
+                setError('Please log in to access the dashboard.');
+                setTimeout(() => navigate('/login'), 2000);
+            } else {
+                setError('Failed to load dashboard data. Please try again.');
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Handle incident updates (refresh data after edit/delete)
+    const handleIncidentUpdate = () => {
+        console.log('🔄 Refreshing incidents after update...');
+        fetchDashboardData();
+    };
 
     // Loading state
     if (loading) {
@@ -122,6 +129,8 @@ const Dashboard = () => {
                             incidents={incidents}
                             title="Recent Incidents"
                             maxItems={6}
+                            currentUserId={profile?.id}
+                            onIncidentUpdate={handleIncidentUpdate}
                         />
                     </div>
 
